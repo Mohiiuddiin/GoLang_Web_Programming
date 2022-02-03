@@ -1,8 +1,8 @@
 package renderer
 
 import (
-	"GOLANG_WEB_DEV/HELLO_WORLD/pkg/config"
-	"GOLANG_WEB_DEV/HELLO_WORLD/pkg/models"
+	"github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/pkg/config"
+	"github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/pkg/models"
 	"bytes"
 	"fmt"
 	"log"

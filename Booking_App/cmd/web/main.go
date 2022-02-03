@@ -1,14 +1,13 @@
 package main
 
 import (
-	"GOLANG_WEB_DEV/HELLO_WORLD/pkg/config"
-	handler "GOLANG_WEB_DEV/HELLO_WORLD/pkg/handlers"
-	renderer "GOLANG_WEB_DEV/HELLO_WORLD/pkg/renderers"
 	"fmt"
 	"log"
 	"net/http"
 	"time"
-
+	"github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/pkg/config"
+	handler "github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/pkg/handlers"
+	renderer "github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/pkg/renderers"
 	"github.com/alexedwards/scs/v2"
 )
 

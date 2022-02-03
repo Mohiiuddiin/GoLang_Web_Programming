@@ -1,8 +1,8 @@
 package main
 
 import (
-	"GOLANG_WEB_DEV/HELLO_WORLD/pkg/config"
-	handler "GOLANG_WEB_DEV/HELLO_WORLD/pkg/handlers"
+	"github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/pkg/config"
+	handler "github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/pkg/handlers"
 	"net/http"
 
 	// "github.com/bmizerany/pat"
