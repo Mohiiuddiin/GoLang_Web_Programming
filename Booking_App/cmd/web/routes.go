@@ -18,14 +18,14 @@ func routes(app *config.AppConfig) http.Handler {
 	// mux.Get("/about",http.HandlerFunc(handler.Repo.About))
 
 	//using go-chi
-	mux := chi.NewRouter()	
-	
+	mux := chi.NewRouter()
+
 	mux.Use(middleware.Recoverer)
 	mux.Use(NoSurf)
 	mux.Use(SessionLoad)
-	
-	mux.Get("/Home",handler.Repo.Home)
-	mux.Get("/About",handler.Repo.About)
-	
+
+	mux.Get("/Home", handler.Repo.Home)
+	mux.Get("/About", handler.Repo.About)
+
 	return mux
 }

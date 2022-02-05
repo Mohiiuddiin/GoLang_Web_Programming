@@ -1,34 +1,32 @@
 package renderer
 
 import (
-	"github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/pkg/config"
-	"github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/pkg/models"
 	"bytes"
 	"fmt"
+	"github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/pkg/config"
+	"github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/pkg/models"
 	"log"
 	"net/http"
 	"path/filepath"
 	"text/template"
 )
 
-var functions = template.FuncMap{
-
-}
+var functions = template.FuncMap{}
 var app *config.AppConfig
 
-func NewTemplates(a *config.AppConfig){
+func NewTemplates(a *config.AppConfig) {
 	app = a
 }
-func AddDefault(td *models.TemplateData)*models.TemplateData{
+func AddDefault(td *models.TemplateData) *models.TemplateData {
 	return td
 }
 func RenderTemplate(rw http.ResponseWriter, temp string, td *models.TemplateData) {
-    var tc map[string]*template.Template
+	var tc map[string]*template.Template
 
 	if app.UseCache {
 		tc = app.TemplateCache
-	}else{
-		tc,_ = RenderTemplateTest()
+	} else {
+		tc, _ = RenderTemplateTest()
 	}
 	// tc ,err := RenderTemplateTest()
 	// fmt.Println(temp)
@@ -39,7 +37,7 @@ func RenderTemplate(rw http.ResponseWriter, temp string, td *models.TemplateData
 	// fmt.Println(tc)
 
 	t, ok := tc[temp]
-	
+
 	if !ok {
 		log.Fatal("Could not get template from template cache")
 	}
@@ -47,11 +45,11 @@ func RenderTemplate(rw http.ResponseWriter, temp string, td *models.TemplateData
 	buf := new(bytes.Buffer)
 
 	td = AddDefault(td)
-	_ = t.Execute(buf,td) 
+	_ = t.Execute(buf, td)
 	_, err := buf.WriteTo(rw)
 	if err != nil {
 		//fmt.Println("Error getting template cache:", err)
-		fmt.Println("Error writing to browser",err)
+		fmt.Println("Error writing to browser", err)
 	}
 
 	// parsedTemplate, _ := template.ParseFiles("./Templates/" + temp)
@@ -63,35 +61,35 @@ func RenderTemplate(rw http.ResponseWriter, temp string, td *models.TemplateData
 	// }
 }
 
-func RenderTemplateTest()(map[string]*template.Template,error) {
+func RenderTemplateTest() (map[string]*template.Template, error) {
 	myCahhe := map[string]*template.Template{}
 	pages, err := filepath.Glob("./Templates/*.page.tmpl")
-	if err!= nil{
-		return myCahhe,err
+	if err != nil {
+		return myCahhe, err
 	}
 	// fmt.Println(pages)
 	for _, page := range pages {
 
 		name := filepath.Base(page)
 		// fmt.Println("name:"+name+",page:"+page)
-		ts,err := template.New(name).Funcs(functions).ParseFiles(page)
+		ts, err := template.New(name).Funcs(functions).ParseFiles(page)
 		// fmt.Println(ts)
 		// fmt.Println(*ts)
 		// fmt.Println(&ts)
-		if err!= nil{
-			return myCahhe,err
+		if err != nil {
+			return myCahhe, err
 		}
-		matches,err := filepath.Glob("./Templates/*.layout.tmpl")
-		if err!= nil{
-			return myCahhe,err
+		matches, err := filepath.Glob("./Templates/*.layout.tmpl")
+		if err != nil {
+			return myCahhe, err
 		}
-		if len(matches)>0 {
+		if len(matches) > 0 {
 			ts, err = ts.ParseGlob("./Templates/*.layout.tmpl")
-			if err!= nil{
-				return myCahhe,err
+			if err != nil {
+				return myCahhe, err
 			}
 		}
 		myCahhe[name] = ts
 	}
-	return myCahhe,nil
+	return myCahhe, nil
 }
