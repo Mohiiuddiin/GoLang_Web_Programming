@@ -2,10 +2,11 @@ package handler
 
 import (
 	"fmt"
+	"net/http"
+
 	"github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/pkg/config"
 	"github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/pkg/models"
 	renderer "github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/pkg/renderers"
-	"net/http"
 )
 
 //the repository used by handlers
@@ -54,3 +55,20 @@ func (m *Repository) About(rw http.ResponseWriter, r *http.Request) {
 		StringMap: stringMap,
 	})
 }
+
+func (m *Repository) Generals(rw http.ResponseWriter, r *http.Request) {
+	renderer.RenderTemplate(rw, "generals.page.tmpl", &models.TemplateData{})
+}
+
+func (m *Repository) Majors(rw http.ResponseWriter, r *http.Request) {
+	renderer.RenderTemplate(rw, "majors.page.tmpl", &models.TemplateData{})
+}
+
+func (m *Repository) Reservation(rw http.ResponseWriter, r *http.Request) {	
+	renderer.RenderTemplate(rw, "reservation.page.tmpl", &models.TemplateData{})
+}
+func (m *Repository) Availability(rw http.ResponseWriter, r *http.Request) {	
+	renderer.RenderTemplate(rw, "search-availability.page.tmpl", &models.TemplateData{})
+}//Availability
+
+

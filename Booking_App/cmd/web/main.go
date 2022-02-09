@@ -30,6 +30,7 @@ func main() {
 	app.Session = session
 
 	tc, err := renderer.RenderTemplateTest()
+	//fmt.Println(err)
 	if err != nil {
 		log.Fatal("Cant create template cache")
 	}

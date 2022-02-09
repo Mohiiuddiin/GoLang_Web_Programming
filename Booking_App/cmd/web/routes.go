@@ -5,6 +5,7 @@ import (
 
 	"github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/pkg/config"
 	handler "github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/pkg/handlers"
+
 	// "github.com/bmizerany/pat"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
@@ -24,8 +25,13 @@ func routes(app *config.AppConfig) http.Handler {
 	mux.Use(NoSurf)
 	mux.Use(SessionLoad)
 
-	mux.Get("/Home", handler.Repo.Home)
-	mux.Get("/About", handler.Repo.About)
+	mux.Get("/home", handler.Repo.Home)
+	mux.Get("/about", handler.Repo.About)
+	mux.Get("/generals-suite", handler.Repo.Generals)
+	mux.Get("/majors-suite", handler.Repo.Majors)
+	mux.Get("/search-availability", handler.Repo.Availability)//search-availability
+	mux.Get("/make-reservation", handler.Repo.Reservation)
+
 
 	fileServer := http.FileServer(http.Dir("./static/"))
 	mux.Handle("/static/*", http.StripPrefix("/static",fileServer))

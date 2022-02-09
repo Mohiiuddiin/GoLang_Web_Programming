@@ -3,12 +3,13 @@ package renderer
 import (
 	"bytes"
 	"fmt"
-	"github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/pkg/config"
-	"github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/pkg/models"
 	"log"
 	"net/http"
 	"path/filepath"
 	"text/template"
+
+	"github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/pkg/config"
+	"github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/pkg/models"
 )
 
 var functions = template.FuncMap{}
@@ -67,13 +68,13 @@ func RenderTemplateTest() (map[string]*template.Template, error) {
 	if err != nil {
 		return myCahhe, err
 	}
-	// fmt.Println(pages)
+	//  fmt.Println(pages)
 	for _, page := range pages {
 
 		name := filepath.Base(page)
 		// fmt.Println("name:"+name+",page:"+page)
 		ts, err := template.New(name).Funcs(functions).ParseFiles(page)
-		// fmt.Println(ts)
+		//fmt.Println(ts)
 		// fmt.Println(*ts)
 		// fmt.Println(&ts)
 		if err != nil {
