@@ -10,7 +10,7 @@
                   <h1 class="mt-5">
                       Serach For Availabality
                   </h1>  
-                  <form action="" method="post" class="needs-validation" novalidate>                      
+                  <form action="/search-availability" method="post" class="needs-validation" novalidate>                      
                         <!-- <div class="form-row">
                             <div class="col">
                               <div class="form-group">
@@ -28,6 +28,7 @@
                             </div>
                         </div>    -->
                         
+                        <input hidden type="text" name="csrf_token" value="{{.CSRFToken}}">
                         <div class="form-row">
                           <div class="col">
                             <div class="form-row" id="reservations-date-range">

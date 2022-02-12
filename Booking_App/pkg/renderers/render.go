@@ -10,6 +10,7 @@ import (
 
 	"github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/pkg/config"
 	"github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/pkg/models"
+	"github.com/justinas/nosurf"
 )
 
 var functions = template.FuncMap{}
@@ -18,10 +19,12 @@ var app *config.AppConfig
 func NewTemplates(a *config.AppConfig) {
 	app = a
 }
-func AddDefault(td *models.TemplateData) *models.TemplateData {
+func AddDefault(td *models.TemplateData,r *http.Request) *models.TemplateData {
+
+	td.CSRFToken = nosurf.Token(r)
 	return td
 }
-func RenderTemplate(rw http.ResponseWriter, temp string, td *models.TemplateData) {
+func RenderTemplate(rw http.ResponseWriter,r *http.Request, temp string, td *models.TemplateData) {
 	var tc map[string]*template.Template
 
 	if app.UseCache {
@@ -45,7 +48,7 @@ func RenderTemplate(rw http.ResponseWriter, temp string, td *models.TemplateData
 
 	buf := new(bytes.Buffer)
 
-	td = AddDefault(td)
+	td = AddDefault(td,r)
 	_ = t.Execute(buf, td)
 	_, err := buf.WriteTo(rw)
 	if err != nil {
