@@ -3,8 +3,8 @@ package main
 import (
 	"net/http"
 
-	"github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/pkg/config"
-	handler "github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/pkg/handlers"
+	handler "github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/internal/handlers"
+	"github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/internal/config"
 
 	// "github.com/bmizerany/pat"
 	"github.com/go-chi/chi/v5"
@@ -31,6 +31,7 @@ func routes(app *config.AppConfig) http.Handler {
 	mux.Get("/majors-suite", handler.Repo.Majors)
 	mux.Get("/search-availability", handler.Repo.Availability)//search-availability
 	mux.Post("/search-availability", handler.Repo.PostAvailability)
+	mux.Post("/search-availability-json", handler.Repo.AvailabilityJSON)
 
 	mux.Get("/make-reservation", handler.Repo.Reservation)
 

@@ -8,8 +8,8 @@ import (
 	"path/filepath"
 	"text/template"
 
-	"github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/pkg/config"
-	"github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/pkg/models"
+	"github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/internal/config"
+	"github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/internal/models"
 	"github.com/justinas/nosurf"
 )
 

@@ -2,13 +2,14 @@ package main
 
 import (
 	"fmt"
-	"github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/pkg/config"
-	handler "github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/pkg/handlers"
-	renderer "github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/pkg/renderers"
-	"github.com/alexedwards/scs/v2"
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/internal/config"
+	handler "github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/internal/handlers"
+	renderer "github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/internal/renderers"
+	"github.com/alexedwards/scs/v2"
 )
 
 const port = ":8080"

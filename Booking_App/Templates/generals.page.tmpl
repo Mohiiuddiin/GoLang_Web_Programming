@@ -62,7 +62,36 @@
           <!-- <button type="submit" class="btn btn-primary">Search Availabality</button>  -->                     
       </form>
       `
-      attention.custom({msg:html,title:"Choose your date"});
+      attention.custom({
+      msg:html,
+      title:"Choose your date",
+      willOpen:()=>{
+          const elem = document.getElementById('reservations-date-modal')
+          const rp = new DateRangePicker(elem,{
+            format:'yyyy-mm-dd',
+            
+          })
+        },
+        didOpen:()=>{
+          document.getElementById("start").removeAttribute("disabled");
+          document.getElementById("end").removeAttribute("disabled");
+          
+        },
+      callback:function(formValues){
+        console.log("called");
+
+        let form = document.getElementById("check_avaivability_form");
+        let formData = new FormData(form);
+        formData.append("csrf_token","{{.CSRFToken}}")
+        fetch('/search-availability-json',{
+          method:"post",body:formData
+        })
+        .then(response=>response.json())
+        .then(data=>{
+          console.log(data)
+        })
+      }
+      });
       
   })
 

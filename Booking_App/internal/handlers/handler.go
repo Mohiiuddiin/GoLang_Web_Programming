@@ -1,12 +1,14 @@
 package handler
 
 import (
+	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 
-	"github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/pkg/config"
-	"github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/pkg/models"
-	renderer "github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/pkg/renderers"
+	"github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/internal/config"
+	"github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/internal/models"
+	renderer "github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/internal/renderers"
 )
 
 //the repository used by handlers
@@ -75,6 +77,26 @@ func (m *Repository) PostAvailability(rw http.ResponseWriter, r *http.Request) {
 	end := r.Form.Get("end")
 	rw.Write([]byte(fmt.Sprintf("start date:%s,end date:%s",start,end)))
 	// rw.Write([]byte("Request Posted Successfully..."))
+}
+
+type jsonResponse struct{
+	OK bool `json:"ok"`
+	Message string `json:"message"`
+}
+
+func (m *Repository) AvailabilityJSON(rw http.ResponseWriter, r *http.Request) {	
+	resp := jsonResponse{
+		OK: true,
+		Message: "Available",
+	}
+
+	out,err := json.MarshalIndent(resp,"","     ")
+	if err!=nil {
+		log.Println(err)
+	}
+
+ 	rw.Header().Set("Content-Type","application/json")
+	rw.Write(out)
 }
 
 
