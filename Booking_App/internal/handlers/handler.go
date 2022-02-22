@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/internal/config"
+	"github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/internal/forms"
 	"github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/internal/models"
 	renderer "github.com/Mohiiuddiin/GoLang_Web_Programming/tree/main/Booking_App/internal/renderers"
 )
@@ -14,7 +15,7 @@ import (
 //the repository used by handlers
 var Repo *Repository
 
-//repository type
+ //repository type
 type Repository struct {
 	App *config.AppConfig
 }
@@ -68,8 +69,18 @@ func (m *Repository) Majors(rw http.ResponseWriter, r *http.Request) {
 func (m *Repository) Reservation(rw http.ResponseWriter, r *http.Request) {	
 	renderer.RenderTemplate(rw,r, "reservation.page.tmpl", &models.TemplateData{})
 }
+func (m *Repository) PostReservation(rw http.ResponseWriter, r *http.Request) {	
+	err := r.ParseForm()
+	if err!=nil{
+		log.Println(err)
+		return
+	}
+
+}
 func (m *Repository) Availability(rw http.ResponseWriter, r *http.Request) {	
-	renderer.RenderTemplate(rw,r, "search-availability.page.tmpl", &models.TemplateData{})
+	renderer.RenderTemplate(rw,r, "search-availability.page.tmpl", &models.TemplateData{
+		Form: forms.New(nil),
+	})
 }//Availability
 
 func (m *Repository) PostAvailability(rw http.ResponseWriter, r *http.Request) {	
